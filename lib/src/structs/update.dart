@@ -16,7 +16,7 @@ class LightClientUpdate {
   final LightClientHeader attestedHeader;
   final SyncCommittee nextSyncCommittee;
   final SyncCommitteeBranch nextSyncCommitteeBranch;
-  final BeaconBlockHeader? finalizedHeader;
+  final LightClientHeader? finalizedHeader;
   final FinalityBranch? finalityBranch;
   final SyncAggregate syncAggregate;
   final int signatureSlot;
@@ -29,4 +29,49 @@ class LightClientUpdate {
       this.finalityBranch,
       required this.syncAggregate,
       required this.signatureSlot});
+}
+
+class LightClientFinalityUpdate {
+  final LightClientHeader attestedHeader;
+  final LightClientHeader finalizedHeader;
+  final FinalityBranch finalityBranch;
+  final SyncAggregate syncAggregate;
+  final int signatureSlot;
+
+  LightClientFinalityUpdate(
+      {required this.attestedHeader,
+      required this.finalizedHeader,
+      required this.finalityBranch,
+      required this.syncAggregate,
+      required this.signatureSlot});
+}
+
+class LightClientOptimisticUpdate {
+  final LightClientHeader attestedHeader;
+  final SyncAggregate syncAggregate;
+  final int signatureSlot;
+
+  LightClientOptimisticUpdate(
+      {required this.attestedHeader,
+      required this.syncAggregate,
+      required this.signatureSlot});
+}
+
+class LightClientStore {
+  final LightClientHeader finalizedHeader;
+  final SyncCommittee currentSyncCommittee;
+  final SyncCommittee nextSyncCommittee;
+  final LightClientUpdate? bestValidUpdate;
+  final LightClientHeader optimisticHeader;
+  final int previousMaxActiveParticipants;
+  final int currentMaxActiveParticipants;
+
+  LightClientStore(
+      {required this.finalizedHeader,
+      required this.currentSyncCommittee,
+      required this.nextSyncCommittee,
+      required this.bestValidUpdate,
+      required this.optimisticHeader,
+      required this.previousMaxActiveParticipants,
+      required this.currentMaxActiveParticipants});
 }

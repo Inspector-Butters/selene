@@ -2,6 +2,10 @@ class SyncCommittee {
   final List<String> pubkeys;
 
   SyncCommittee({required this.pubkeys});
+
+  String hashTreeRoot() {
+    throw UnimplementedError();
+  }
 }
 
 class SyncCommitteeBranch {

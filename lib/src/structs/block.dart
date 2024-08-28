@@ -11,6 +11,19 @@ class BeaconBlockHeader {
       required this.parentRoot,
       required this.stateRoot,
       required this.bodyRoot});
+
+  static fromJson(response) {
+    return BeaconBlockHeader(
+        slot: response['slot'],
+        proposerIndex: response['proposerIndex'],
+        parentRoot: response['parentRoot'],
+        stateRoot: response['stateRoot'],
+        bodyRoot: response['bodyRoot']);
+  }
+
+  String hashTreeRoot() {
+    throw UnimplementedError();
+  }
 }
 
 class ExecutionPayloadHeader {
@@ -50,10 +63,35 @@ class ExecutionPayloadHeader {
       required this.withdrawalsRoot,
       required this.blobGasUsed,
       required this.excessBlobGas});
+
+  static fromJson(response) {
+    return ExecutionPayloadHeader(
+        parentHash: response['parentHash'],
+        feeRecipient: response['feeRecipient'],
+        stateRoot: response['stateRoot'],
+        receiptsRoot: response['receiptsRoot'],
+        logsBloom: response['logsBloom'],
+        prevRandao: response['prevRandao'],
+        blockNumber: response['blockNumber'],
+        gasLimit: response['gasLimit'],
+        gasUsed: response['gasUsed'],
+        timestamp: response['timestamp'],
+        extraData: response['extraData'],
+        baseFeePerGas: response['baseFeePerGas'],
+        blockHash: response['blockHash'],
+        transactionsRoot: response['transactionsRoot'],
+        withdrawalsRoot: response['withdrawalsRoot'],
+        blobGasUsed: response['blobGasUsed'],
+        excessBlobGas: response['excessBlobGas']);
+  }
 }
 
 class ExecutionBranch {
   final List<String> branch;
 
   ExecutionBranch({required this.branch});
+
+  static fromJson(response) {
+    return ExecutionBranch(branch: response['branch']);
+  }
 }

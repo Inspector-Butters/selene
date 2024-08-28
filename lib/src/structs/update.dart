@@ -12,6 +12,17 @@ class LightClientHeader {
       required this.executionBranch});
 }
 
+class LightClientBootstrap {
+  final LightClientHeader header;
+  final SyncCommittee currentSyncCommittee;
+  final SyncCommitteeBranch currentSyncCommitteeBranch;
+
+  LightClientBootstrap(
+      {required this.header,
+      required this.currentSyncCommittee,
+      required this.currentSyncCommitteeBranch});
+}
+
 class LightClientUpdate {
   final LightClientHeader attestedHeader;
   final SyncCommittee nextSyncCommittee;
@@ -60,7 +71,7 @@ class LightClientOptimisticUpdate {
 class LightClientStore {
   final LightClientHeader finalizedHeader;
   final SyncCommittee currentSyncCommittee;
-  final SyncCommittee nextSyncCommittee;
+  final SyncCommittee? nextSyncCommittee;
   final LightClientUpdate? bestValidUpdate;
   final LightClientHeader optimisticHeader;
   final int previousMaxActiveParticipants;
@@ -69,8 +80,8 @@ class LightClientStore {
   LightClientStore(
       {required this.finalizedHeader,
       required this.currentSyncCommittee,
-      required this.nextSyncCommittee,
-      required this.bestValidUpdate,
+      this.nextSyncCommittee,
+      this.bestValidUpdate,
       required this.optimisticHeader,
       required this.previousMaxActiveParticipants,
       required this.currentMaxActiveParticipants});

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 class KeyValueStore {
-  final String _filePath = "kvstore.json";
+  final String _filePath = "lib/src/kv/kv.json";
   Map<String, dynamic> _store = {};
 
   KeyValueStore() {
@@ -39,6 +39,18 @@ class KeyValueStore {
   void delete(String key) {
     _store.remove(key);
     _save();
+  }
+
+  bool isEmpty() {
+    return _store.isEmpty;
+  }
+
+  dynamic getLastItem() {
+    return _store.entries.last;
+  }
+
+  dynamic getFirstItem() {
+    return _store.entries.first;
   }
 
   // Clear the entire store

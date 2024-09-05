@@ -3,13 +3,19 @@ import 'package:selene/src/structs/sync_committee.dart';
 
 class LightClientHeader {
   final BeaconBlockHeader beacon;
-  final ExecutionPayloadHeader execution;
-  final ExecutionBranch executionBranch;
+  final ExecutionPayloadHeader? execution;
+  final ExecutionBranch? executionBranch;
 
   LightClientHeader(
-      {required this.beacon,
-      required this.execution,
-      required this.executionBranch});
+      {required this.beacon, this.execution, this.executionBranch});
+
+  static fromJson(response) {
+    return LightClientHeader(
+        beacon: BeaconBlockHeader.fromJson(response['beacon']),
+        execution: ExecutionPayloadHeader.fromJson(response['execution']),
+        executionBranch:
+            ExecutionBranch.fromJson(response['execution_branch']));
+  }
 }
 
 class LightClientBootstrap {
@@ -21,6 +27,15 @@ class LightClientBootstrap {
       {required this.header,
       required this.currentSyncCommittee,
       required this.currentSyncCommitteeBranch});
+
+  static fromJson(response) {
+    return LightClientBootstrap(
+        header: LightClientHeader.fromJson(response['data']['header']),
+        currentSyncCommittee:
+            SyncCommittee.fromJson(response['data']['current_sync_committee']),
+        currentSyncCommitteeBranch: SyncCommitteeBranch.fromJson(
+            response['data']['current_sync_committee_branch']));
+  }
 }
 
 class LightClientUpdate {

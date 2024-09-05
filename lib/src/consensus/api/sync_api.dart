@@ -2,29 +2,21 @@ import 'package:requests/requests.dart';
 import 'package:selene/src/config/configs.dart';
 import 'package:selene/src/structs/update.dart';
 
-import '../../structs/block.dart';
-
 /// SyncAPIs class contains all the APIs related to getting the updates using the sync protocol.
 class SyncAPIs {
   static final String lcPath = "eth/v1/beacon/light_client/";
 
   /// Get the light client bootstrap.
-  static dynamic lightClientBootstrap(String blockHash) {
+  static dynamic lightClientBootstrap(String blockHash) async {
     if (blockHash.isEmpty) {
       throw Exception('Block hash cannot be empty');
     }
     // send request to the server to get the light client bootstrap
     var response =
-        _getRequest("${Configs.RPC_URL}${lcPath}bootstrap/$blockHash");
+        await _getRequest("${Configs.RPC_URL}${lcPath}bootstrap/$blockHash");
 
-    // var header = LightClientHeader(
-    //     beacon: BeaconBlockHeader.fromJson(response['header']['beacon']),
-    //     execution:
-    //         ExecutionPayloadHeader.fromJson(response['header']['execution']),
-    //     executionBranch:
-    //         ExecutionBranch.fromJson(response['header']['executionBranch']));
-
-    return response;
+    LightClientBootstrap bootstrap = LightClientBootstrap.fromJson(response);
+    return bootstrap;
   }
 
   static _getRequest(String url) async {

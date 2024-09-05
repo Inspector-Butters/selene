@@ -19,6 +19,10 @@ class Configs {
   static String _thirdPartyRPC_URL = "";
   static String? _thirdPartyAPI_KEY = "";
 
+  static num denebForkEpoch = 269568;
+  static num capellaForkEpoch = 194048;
+  static num altairForkEpoch = 74240;
+
   static void _load() {
     final file = File(_filePath);
     if (file.existsSync()) {

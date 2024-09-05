@@ -14,11 +14,11 @@ class BeaconBlockHeader {
 
   static fromJson(response) {
     return BeaconBlockHeader(
-        slot: response['slot'],
-        proposerIndex: response['proposerIndex'],
-        parentRoot: response['parentRoot'],
-        stateRoot: response['stateRoot'],
-        bodyRoot: response['bodyRoot']);
+        slot: int.parse(response['slot']),
+        proposerIndex: int.parse(response['proposer_index']),
+        parentRoot: response['parent_root'],
+        stateRoot: response['state_root'],
+        bodyRoot: response['body_root']);
   }
 
   String hashTreeRoot() {
@@ -66,23 +66,23 @@ class ExecutionPayloadHeader {
 
   static fromJson(response) {
     return ExecutionPayloadHeader(
-        parentHash: response['parentHash'],
-        feeRecipient: response['feeRecipient'],
-        stateRoot: response['stateRoot'],
-        receiptsRoot: response['receiptsRoot'],
-        logsBloom: response['logsBloom'],
-        prevRandao: response['prevRandao'],
-        blockNumber: response['blockNumber'],
-        gasLimit: response['gasLimit'],
-        gasUsed: response['gasUsed'],
-        timestamp: response['timestamp'],
-        extraData: response['extraData'],
-        baseFeePerGas: response['baseFeePerGas'],
-        blockHash: response['blockHash'],
-        transactionsRoot: response['transactionsRoot'],
-        withdrawalsRoot: response['withdrawalsRoot'],
-        blobGasUsed: response['blobGasUsed'],
-        excessBlobGas: response['excessBlobGas']);
+        parentHash: response['parent_hash'],
+        feeRecipient: response['fee_recipient'],
+        stateRoot: response['state_root'],
+        receiptsRoot: response['receipts_root'],
+        logsBloom: response['logs_bloom'],
+        prevRandao: response['prev_randao'],
+        blockNumber: int.parse(response['block_number']),
+        gasLimit: int.parse(response['gas_limit']),
+        gasUsed: int.parse(response['gas_used']),
+        timestamp: int.parse(response['timestamp']),
+        extraData: response['extra_data'],
+        baseFeePerGas: int.parse(response['base_fee_per_gas']),
+        blockHash: response['block_hash'],
+        transactionsRoot: response['transactions_root'],
+        withdrawalsRoot: response['withdrawals_root'],
+        blobGasUsed: int.parse(response['blob_gas_used']),
+        excessBlobGas: int.parse(response['excess_blob_gas']));
   }
 }
 
@@ -92,6 +92,7 @@ class ExecutionBranch {
   ExecutionBranch({required this.branch});
 
   static fromJson(response) {
-    return ExecutionBranch(branch: response['branch']);
+    List<String> branchList = response.cast<String>();
+    return ExecutionBranch(branch: branchList);
   }
 }

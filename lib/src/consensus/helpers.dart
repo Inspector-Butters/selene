@@ -1,8 +1,8 @@
-import 'package:selene/src/structs/sync_committee.dart';
+import '../structs/update.dart';
 
 bool isValidMerkleBranch(
     {required String leaf,
-    required SyncCommitteeBranch branch,
+    required List<String> branch,
     required int depth,
     required int index,
     required String root}) {
@@ -14,5 +14,13 @@ int floorLog2(int x) {
 }
 
 int getSubtreeIndex(int x) {
+  throw UnimplementedError();
+}
+
+int computeEpochAtSlot(int slot) {
+  throw UnimplementedError();
+}
+
+String getLcExecutionRoot(LightClientHeader header) {
   throw UnimplementedError();
 }
